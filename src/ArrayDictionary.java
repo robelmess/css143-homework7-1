@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class ArrayDictionary implements Dictionary {
     private int capacity;
     private int count;
@@ -57,7 +59,26 @@ public class ArrayDictionary implements Dictionary {
     // Return true if an entry is deleted, false otherwise
     @Override
     public boolean remove(int key) {
-        // homework
+        if(contains(key))
+        {
+            for(int i=0; i<entries.length;i++)
+            {
+                KVEntry hold=entries[i];
+                KVEntry nexer=null;
+                while(hold!=null)
+                {
+                    if(hold.key ==key)
+                    {
+                        if(hold==null){
+                            entries[i]=hold.next;
+                        }
+                        return true;
+                    }
+                    nexer=hold;
+                    nexer=nexer.next;
+                }
+            }
+        }
         return false;
     }
 
@@ -65,7 +86,18 @@ public class ArrayDictionary implements Dictionary {
     // with the key
     @Override
     public boolean contains(int key) {
-        // homework
+        for(int i=0;i<entries.length;i++)
+        {
+            KVEntry ptr = entries[i];
+            while(ptr != null)
+            {
+                if(ptr.key==key)
+                {
+                    return true;
+                }
+                ptr=ptr.next;
+            }
+        }
         return false;
     }
 
